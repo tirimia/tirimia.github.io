@@ -1,0 +1,8 @@
+.envrc
+.dir-locals.el
+/.direnv/
+result
+node_modules
+./azubinomicon
+/notes/logseq/bak
+/main/dist/

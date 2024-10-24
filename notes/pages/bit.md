@@ -1,0 +1,1 @@
+- It's a single 0 or 1, the foundation of [[number base]] 2.

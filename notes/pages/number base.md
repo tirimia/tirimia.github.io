@@ -1,0 +1,5 @@
+- A number base is how we represent numbers in different systems.
+- For any base x, the digits from right to left (0-indexed) represent the value x^index
+- Examples:
+	- For base 10, the number 567 can be broken down into:
+		- 7 x 10^0 + 6 x 10^1 + 5 x 10^3
