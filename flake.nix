@@ -16,7 +16,7 @@
       };
       build-with-docker = pkgs.writeShellScriptBin "build-notes" ''
         mkdir -p result/azubinomicon
-        ${pkgs.docker}/bin/docker run -v ./notes:/graph:ro -v ./result/azubinomicon:/out -e PUB_THEME=dark --platform linux/amd64 ghcr.io/l-trump/logseq-publish-spa:alpine
+        ${pkgs.docker}/bin/docker run -v ./notes:/graph:ro -v ./result/azubinomicon:/out -e PUB_THEME=dark --platform linux/amd64 ghcr.io/tirimia/tirimia.github.io:logseq-publish-spa
       '';
       full-bundle = pkgs.writeShellScriptBin "full-bundle" ''
         mkdir -p result
