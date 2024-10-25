@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@main
-      - run: nix develop --command bash -c 'full-bundle'
+      - run: nix run
       - name: Upload static files as artifact
         id: deployment
         uses: actions/upload-pages-artifact@v3
