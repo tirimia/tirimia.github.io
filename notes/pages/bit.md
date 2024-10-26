@@ -1,1 +1,1 @@
-- It's a single 0 or 1, the foundation of [[number base]] 2.
+- It's a single 0 or 1, the foundation of the [binary](((671d36bd-a22f-4d3a-8a1c-f187dc5425c4))) number system.
