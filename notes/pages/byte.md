@@ -1,1 +1,1 @@
-- A block of 8 [[bit]]s
+-   A block of 8 [[bit]]s

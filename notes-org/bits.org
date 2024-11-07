@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       1BBFCBC1-54B3-4A17-BE14-623BE19E9306
+:END:
+#+TITLE: Bits
+
+What is a bit ? A single 0 or 1 logically, an electrical pulse or the lack
+thereof physically. They are the fundamental unit in computer science, but
+typically we use them grouped in a [[id:24CB20CA-749D-48A9-882B-5888B7EAB123][Byte]]
+
+included for frens [[./assets/org-roam-logo.png]]
