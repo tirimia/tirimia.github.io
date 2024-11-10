@@ -10,12 +10,12 @@ jobs:
         steps:
             - uses: actions/checkout@v4
             - uses: DeterminateSystems/nix-installer-action@main
-            - run: nix run
+            - run: nix develop --command build
             - name: Upload static files as artifact
               id: deployment
               uses: actions/upload-pages-artifact@v3
               with:
-                  path: result/
+                  path: dist/
     deploy:
         permissions:
             contents: read

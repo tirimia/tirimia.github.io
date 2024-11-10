@@ -1,9 +1,0 @@
-:PROPERTIES:
-:ID:       449A7364-3EC2-4D01-8950-28B3DC314477
-:END:
-#+TITLE: Functional programming
-
-The core concept of functional programming is applying and composing functions.
-
-Functions are trees of expressions that map data to other data, instead of
-updating mutable state.

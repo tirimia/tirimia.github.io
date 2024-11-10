@@ -20,6 +20,7 @@ data = cur.fetchall()
 links = [
     {"source": link[0].replace('"', ""), "target": link[1].replace('"', ""), "value": 1}
     for link in data
+    if not link[1].startswith('".')  # Cuts out images
 ]
 
 file_path = os.environ.get("OUTPUT_FILE") or "main/graph.json"

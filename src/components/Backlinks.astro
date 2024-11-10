@@ -1,0 +1,18 @@
+---
+interface Props {
+    links: Record<string, string>;
+}
+
+const { links } = Astro.props;
+---
+
+<h2>Backlinks</h2>
+<ul>
+    {
+        Object.entries(links).map(([k, v]) => (
+            <li>
+                <a href={`/azubinomicon/notes/${k}`}>{v}</a>
+            </li>
+        ))
+    }
+</ul>

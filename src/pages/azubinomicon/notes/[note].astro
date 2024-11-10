@@ -1,0 +1,40 @@
+---
+import { getCollection } from "astro:content";
+import Backlinks from "@components/Backlinks.astro";
+
+export async function getStaticPaths() {
+    const notes = await getCollection("notes");
+    const regex = /\[[^\]]*\](?:\(\.\/|\()([a-zA-Z0-9_-]+)\.md\)/g;
+    const noteToBacklink = notes.reduce<Record<string, { slug: string; title: string }[]>>((acc, curr) => {
+        const matches = [...curr.body.matchAll(regex)];
+        const slugs = matches.map((match) => match[1]!);
+        slugs.forEach((slug) => {
+            if (!acc[slug]) {
+                acc[slug] = [];
+            }
+            acc[slug].push({ slug: curr.slug, title: curr.data.title });
+        });
+        return acc;
+    }, {});
+    return notes.map((entry) => {
+        const backlinks: Record<string, string> = Object.fromEntries(
+            (noteToBacklink[entry.slug] ?? []).map((ntb) => [ntb.slug, ntb.title]),
+        );
+        return {
+            params: { note: entry.slug },
+            props: { entry, backlinks },
+        };
+    });
+}
+
+// TODO: see how prefetching can work
+// TODO: use the tags property on the entry
+// TODO: make images scale properly, see number system note
+const { entry, backlinks } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<h1>{entry.data.title}</h1>
+{!!entry.data.draft && <h2>🚧 Note is not yet complete 🚧</h2>}
+{entry.body.length === 0 ? <h2>🚧 Empty for now 🚧</h2> : <Content />}
+{Object.keys(backlinks).length > 0 && <Backlinks links={backlinks} />}
