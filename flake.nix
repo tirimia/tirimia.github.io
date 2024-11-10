@@ -15,8 +15,8 @@
         config.allowUnfree = true;
       };
       build = pkgs.writeShellScriptBin "build" ''
-        bun i
-        bun run --bun build
+        ${pkgs.pnpm}/bin/pnpm install # Ridiculous strats for sharp to work
+        ${pkgs.pnpm}/bin/pnpm run build
       '';
     in {
       devShells.default = pkgs.mkShell {
