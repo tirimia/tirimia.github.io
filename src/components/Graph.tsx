@@ -36,8 +36,8 @@ export function Graph() {
             nodeLabel={"name"}
             maxZoom={5}
             minZoom={1}
-            width={window.innerWidth * 0.8}
-            height={window.innerHeight * 0.8}
+            width={window.innerWidth}
+            height={window.innerHeight}
             nodeCanvasObject={(node, ctx) => {
                 // Draw the node
                 ctx.beginPath();
