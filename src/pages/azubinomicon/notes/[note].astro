@@ -30,6 +30,7 @@ export async function getStaticPaths() {
 // TODO: see how prefetching can work
 // TODO: use the tags property on the entry
 // TODO: make images scale properly, see number system note
+// TODO: Tiny button on top to go to source of note
 const { entry, backlinks } = Astro.props;
 const { Content } = await entry.render();
 ---

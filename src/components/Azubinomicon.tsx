@@ -14,7 +14,7 @@ export function Azubinomicon() {
             <div id="azubinomicon">
                 <Notes />
             </div>
-            <div className={`${"graph-panel"} ${graphOpen ? "open" : ''}`}>
+            <div className={`graph-panel ${graphOpen ? "open" : ''}`}>
                 <div id="graph">
                     <Graph />
                 </div>

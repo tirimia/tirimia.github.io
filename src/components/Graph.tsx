@@ -31,10 +31,10 @@ export function Graph() {
         <ForceGraph2D
             graphData={data}
             onNodeClick={clickNode}
-            backgroundColor='#aaaaaa'//'#13151a'
+            backgroundColor='#aaaaaa'
             linkWidth={5}
             nodeLabel={"name"}
-            maxZoom={1}
+            maxZoom={5}
             minZoom={1}
             width={window.innerWidth * 0.8}
             height={window.innerHeight * 0.8}

@@ -1,0 +1,14 @@
+{
+	"Note Boilerplate": {
+		"scope": "markdown",
+		"prefix": "boilerplate",
+		"body": [
+			"---",
+			"title: $1",
+			"draft: ${2:true}",
+			"---",
+			"$0"
+		],
+		"description": "Prepare the basics needed for a note"
+	}
+}

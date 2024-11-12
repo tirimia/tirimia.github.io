@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import { LoadingSpinner } from "@components/LoadingSpinner";
 
 const notesPath = "/azubinomicon/notes/";
 export function HTMLComponent({ fileKey, onLinkClick }: { fileKey: string; onLinkClick: (ref: string) => void }) {
-    const [content, setContent] = useState("Loading...");
+    const [content, setContent] = useState<string | undefined>(undefined);
 
     useEffect(() => {
         fetch(`${notesPath}${fileKey}`)
@@ -28,6 +29,9 @@ export function HTMLComponent({ fileKey, onLinkClick }: { fileKey: string; onLin
             }
         }
     };
+    if (!content) {
+        return <LoadingSpinner />
+    }
 
     return <div style={{ width: "100%" }} onClick={handleClick} dangerouslySetInnerHTML={{ __html: content }} />;
 }
