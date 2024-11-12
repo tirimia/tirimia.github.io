@@ -10,7 +10,7 @@ const articles = (await getCollection("articles")).sort((lhs,rhs) => rhs.data.pu
     <main>
         <h1>Personal blog</h1>
         <h2>I just write about things</h2>
-        { articles.slice(0,10).map((article) => <p><a href={`blog/${article.slug}`}>{article.data.title} - {article.data.publishedAt.toISOString().slice(0,10)}</a></p>)}
+        { articles.slice(0,10).map((article) => <p><a href={`/blog/${article.slug}`}>{article.data.title} - {article.data.publishedAt.toISOString().slice(0,10)}</a></p>)}
     </main>
 </Layout>
 <style>
