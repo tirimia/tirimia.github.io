@@ -27,7 +27,7 @@
         vscodeExtensions = with pkgs.vscode-extensions; [
           astro-build.astro-vscode
           bbenoist.nix
-          ms-python.python
+          gruntfuggly.todo-tree
         ];
       };
     });

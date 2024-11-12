@@ -140,7 +140,22 @@ declare module 'astro:content' {
 	>;
 
 	type ContentEntryMap = {
-		"notes": {
+		"articles": Record<string, {
+  id: string;
+  slug: string;
+  body: string;
+  collection: "articles";
+  data: InferEntrySchema<"articles">;
+  render(): Render[".md"];
+}>;
+"notes": {
+"azubinomicon.md": {
+	id: "azubinomicon.md";
+  slug: "azubinomicon";
+  body: string;
+  collection: "notes";
+  data: InferEntrySchema<"notes">
+} & { render(): Render[".md"] };
 "binary.md": {
 	id: "binary.md";
   slug: "binary";

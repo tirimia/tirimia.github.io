@@ -6,9 +6,19 @@ const notes = defineCollection({
         title: z.string(),
         tags: z.string().array().optional(),
         draft: z.boolean().optional(),
+    }).strict()
+})
+
+const articles = defineCollection({
+    type: 'content',
+    schema: z.object({
+        title: z.string(),
+        subtitle: z.string().min(1).optional(),
+        publishedAt: z.date()
     })
 })
 
 export const collections = {
+    articles,
     notes,
 };
