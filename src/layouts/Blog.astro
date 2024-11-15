@@ -1,0 +1,10 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Header from "@components/Header.astro";
+---
+<Layout title="Blog">
+    <Header links={[{ href: "/azubinomicon", text: "Azubinomicon" }]} />
+    <main class="content">
+        <slot />
+    </main>
+</Layout>

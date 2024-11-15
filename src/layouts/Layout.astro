@@ -1,20 +1,19 @@
 ---
+// import Footer from '@layouts/Footer.astro';
+import '@styles/global.css'
 interface Props {
     title: string;
 }
 
 const { title } = Astro.props;
-const astroBackground = "#13151a"
 ---
-
 <!doctype html>
-<html lang="en" style=`background: ${astroBackground}`>
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta name="description" content="My personal homepage" />
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/png" href="/favicon.png" />
-        <!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" /> -->
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
     </head>
@@ -22,99 +21,3 @@ const astroBackground = "#13151a"
         <slot />
     </body>
 </html>
-<style is:global>
-    :root {
-        --accent: 136, 58, 234;
-        --accent-light: 224, 204, 250;
-        --accent-dark: 49, 10, 101;
-        --accent-gradient: linear-gradient(45deg, rgb(var(--accent)), rgb(var(--accent-light)) 30%, white 60%);
-    }
-    html {
-        font-family: system-ui, sans-serif;
-        /* background: {astroBackground}; */
-        width: 100vw;
-    }
-    code {
-        font-family:
-            Menlo,
-            Monaco,
-            Lucida Console,
-            Liberation Mono,
-            DejaVu Sans Mono,
-            Bitstream Vera Sans Mono,
-            Courier New,
-            monospace;
-    }
-    #azubinomicon img {
-        max-width: 100%; /* don't overflow */
-        height: auto; /* maintain aspect ratio */
-    }
-    #azubinomicon {
-        display: grid;
-        gap: 20px; /* Or whatever your noteGap value is */
-        padding: 20px;
-        overflow: auto;
-        scroll-behavior: smooth;
-        scroll-snap-type: x mandatory;
-        /* Mobile - show one at a time */
-        grid-auto-flow: row;
-        grid-auto-columns: 100%;
-    }
-
-    /* Tablet - show three at a time */
-    @media (min-width: 767px) {
-        #azubinomicon {
-            grid-auto-flow: column; /* Keep stacking horizontally */
-            grid-auto-columns: calc((100% - 40px) / 3); /* 40px is 2 * gap */
-        }
-    }
-
-    /* Desktop - show six at a time */
-    @media (min-width: 2100px) {
-        #azubinomicon {
-            grid-auto-columns: calc((100% - 100px) / 6); /* 100px is 5 * gap */
-            grid-auto-flow: column; /* Keep stacking horizontally */
-        }
-    }
-    .force-graph-container {
-        width: 100%;
-        position: relative;
-        height: 100%;
-    }
-
-    #graph {
-        flex: 1;
-        width: 100%;
-        height: 100%;
-    }
-
-    .force-graph-container canvas {
-        max-width: 100% !important;
-        height: 100% !important;
-        position: relative !important;
-    }
-
-    .graph-panel {
-        position: fixed;
-        top: -100vh;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        z-index: 1000;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .graph-panel.open {
-        top: 0;
-    }
-
-    .graph-toggle {
-        position: fixed;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 1001;
-        cursor: pointer;
-    }
-</style>

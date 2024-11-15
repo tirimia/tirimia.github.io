@@ -1,0 +1,60 @@
+---
+interface Link {
+    href: string;
+    text: string;
+}
+interface Props {
+    links: Link[];
+}
+
+const { links } = Astro.props;
+---
+
+<header class="site-header">
+    <div class="container">
+        <nav class="links">
+            <a href="/">Home</a>
+            { links.map(({ href, text }) => <a href={href}>{text}</a>) }
+            <a href="https://github.com/tirimia">GitHub</a>
+        </nav>
+    </div>
+</header>
+<style>
+    .site-header {
+        background-color: var(--surface-alt);
+        padding: 1.5rem;
+        width: 100%;
+        box-shadow: 0 8px 16px -6px rgba(15, 23, 42, 0.1);
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .site-header .container {
+        max-width: 960px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 1.5rem;
+    }
+    .site-header .links {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+    }
+    .site-header .links a {
+        color: var(--secondary);
+        transition: color 0.2s ease;
+    }
+    .site-header .links a:hover {
+        color: var(--accent);
+    }
+    @media (max-width: 768px) {
+        .site-header .container {
+            justify-content: center;
+        }
+        .site-header .links {
+            justify-content: center;
+        }
+    }
+    </style>

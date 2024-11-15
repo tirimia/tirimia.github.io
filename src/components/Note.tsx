@@ -1,26 +1,42 @@
-import { HTMLComponent } from "./HTMLComponent";
+import { useEffect, useState } from "react";
+import { LoadingSpinner } from "@components/LoadingSpinner";
 
 interface Props {
     name: string;
     onClick: (url: string) => void;
 }
 
+const notesPath = "/azubinomicon/notes/";
 export function Note({ name, onClick }: Props) {
-    return (
-        <div className="note"
-            style={{
-                scrollSnapAlign: "start",
-                scrollSnapStop: "always",
-                display: "flex",
-                background: "#004455",
-                minHeight: 100,
-                height: "fit-content", // Take as much height as needed
-                borderRadius: "8px",
-                padding: "20px",
-                boxShadow: "0 2px 4px rgba(0,0,0,0.1)", // Optional: subtle shadow
-            }}
-        >
-            <HTMLComponent fileKey={name} onLinkClick={onClick} />
-        </div>
-    );
+    const [content, setContent] = useState<string | undefined>(undefined);
+
+    useEffect(() => {
+        fetch(`${notesPath}${name}`)
+            .then((response) => response.text())
+            .then((html) => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, "text/html");
+                setContent(doc.body.innerHTML);
+            });
+    }, [name]);
+
+    const isAnchorElement = (element: EventTarget): element is HTMLAnchorElement => {
+        return element instanceof HTMLAnchorElement;
+    };
+
+    const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (isAnchorElement(e.target)) {
+            const page = new URL(e.target.href);
+            if (page.pathname.startsWith(notesPath)) {
+                e.preventDefault();
+                onClick(page.pathname.replace(".html", "").replace(notesPath, ""));
+                return;
+            }
+        }
+    };
+    if (!content) {
+        return <LoadingSpinner />
+    }
+
+    return <div className="note" onClick={handleClick} dangerouslySetInnerHTML={{ __html: content }} />;
 }

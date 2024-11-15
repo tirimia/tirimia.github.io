@@ -1,0 +1,65 @@
+---
+
+---
+<footer class="site-footer">
+    <div class="container">
+        <div class="links">
+            <a href="/">Home</a>
+            <a href="/blog">Blog</a>
+            <a href="/azubinomicon">Azubinomicon</a>
+            <a href="https://github.com/tirimia">GitHub</a>
+        </div>
+        <div class="copyright">
+            © 2024 Theo • Built with Astro
+        </div>
+    </div>
+</footer>
+<style>
+ .site-footer {
+    background-color: var(--surface-alt);
+    padding: 2rem;
+    width: 100%;
+    box-shadow: 0 -8px 16px -6px rgba(15, 23, 42, 0.1);
+}
+
+.site-footer .container {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.site-footer .links {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.site-footer .links a {
+    color: var(--secondary);
+    transition: color 0.2s ease;
+}
+
+.site-footer .links a:hover {
+    color: var(--accent);
+}
+
+.site-footer .copyright {
+    color: var(--secondary);
+    font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+    .site-footer .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .site-footer .links {
+        justify-content: center;
+    }
+}
+</style>

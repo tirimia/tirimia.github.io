@@ -17,6 +17,9 @@
             "@content/*": [
                 "src/content/*"
             ],
+            "@styles/*": [
+                "src/styles/*"
+            ],
             "@pages/*": [
                 "src/pages/*"
             ]

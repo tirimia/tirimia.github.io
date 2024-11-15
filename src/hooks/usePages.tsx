@@ -3,7 +3,7 @@ import { createContext } from "react";
 import { useSearchParams } from "./useSearchParams";
 
 export const PagesContext = createContext(
-    {pages: [] as string[], openPage: (_idx: number) => (_name :string) => {}}
+    { pages: [] as string[], openPage: (_idx: number) => (_name: string) => { } }
 )
 
 export function usePages() {
@@ -13,15 +13,15 @@ export function usePages() {
 
     const openPage =
         (index = 0) =>
-        (pageName: string) => {
-            const newSearchParams = new URLSearchParams(searchParams);
-            const newPages = pages.slice(0, index).concat([pageName]);
+            (pageName: string) => {
+                const newSearchParams = new URLSearchParams(searchParams);
+                const newPages = pages.slice(0, index).concat([pageName]);
 
-            newSearchParams.delete("page");
-            newPages.forEach((page) => newSearchParams.append("page", page));
+                newSearchParams.delete("page");
+                newPages.forEach((page) => newSearchParams.append("page", page));
 
-            setSearchParams(newSearchParams);
-        };
+                setSearchParams(newSearchParams);
+            };
 
     return { pages, openPage };
 }

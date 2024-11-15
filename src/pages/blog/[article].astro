@@ -1,22 +1,111 @@
 ---
 import { getCollection } from "astro:content";
+import BlogLayout from "@layouts/Blog.astro";
 
 export async function getStaticPaths() {
     const articles = (await getCollection("articles")).sort((lhs,rhs) => lhs.data.publishedAt.valueOf() - rhs.data.publishedAt.valueOf());
-    return articles.map((article, _idx) => {
+
+    // Get all each article and also the next and previous ones for use in a navigation component
+    return articles.map((article, idx) => {
+        const previous = articles[idx-1];
+        const next = articles[idx + 1];
         return {
+            props: { article,  next, previous } ,
             params: { article: article.slug },
-            props: { article, //previous: articles[idx-1], next: articles[idx + 1] 
-                },
-        };
-    })
-}
+        }
+        });
+    }
 
 // TODO: make a next or previous article button component
 
-const { article } = Astro.props
+const { article, next, previous } = Astro.props;
 const { Content } = await article.render()
+// TODO: make a layout to wrap the articles and put the charset there
 ---
-<h1>{article.data.title}</h1>
-{!!article.data.subtitle && <h2>{article.data.subtitle}</h2> }
-<Content/>
+<BlogLayout title={article.data.title}>
+    <h1>{article.data.title}</h1>
+    {!!article.data.subtitle && <h2>{article.data.subtitle}</h2> }
+    <div class="article-body">
+        <Content/>
+    </div>
+    <div class="article-navigation">
+        {previous && <a href={`/blog/${previous.slug}`} class="previous">
+            <span class="previous-title">{previous.data.title}</span>
+        </a>}
+        {next && <a href={`/blog/${next.slug}`} class="next">
+            <span class="next-title">{next.data.title}</span>
+        </a>}
+    </div>
+</BlogLayout>
+<style>
+    h1 {
+        margin-bottom: 0.5rem;
+    }
+
+    h2 {
+        margin-top: 0.5rem;
+    }
+    .article-body {
+        max-width: 800px;
+        margin: auto;
+    }
+
+    .article-navigation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 2rem;
+        max-width: 800px;
+        margin: 3rem auto;
+    }
+
+    .previous, .next {
+        background-color: var(--surface-alt);
+        padding: 1rem 1.5rem;
+        border-radius: 12px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: rgba(15, 23, 42, 0.15) 0px 8px 20px,
+                    rgba(15, 23, 42, 0.25) 0px 6px 12px;
+        flex: 1;
+        display: flex;
+        align-items: center;
+    }
+
+    .previous:hover, .next:hover {
+        transform: translateY(-3px);
+        box-shadow: rgba(15, 23, 42, 0.2) 0px 12px 24px,
+                    rgba(15, 23, 42, 0.3) 0px 8px 16px;
+    }
+
+    .previous {
+        text-align: left;
+    }
+
+    .next {
+        text-align: right;
+        justify-content: flex-end;
+    }
+
+    .previous-title, .next-title {
+        color: var(--secondary);
+        transition: color 0.2s ease;
+    }
+
+    .previous:hover .previous-title,
+    .next:hover .next-title {
+        color: var(--primary);
+    }
+
+    .previous::before {
+        content: "←";
+        margin-right: 0.5rem;
+        color: var(--accent);
+    }
+
+    .next::after {
+        content: "→";
+        margin-left: 0.5rem;
+        color: var(--accent);
+    }
+</style>

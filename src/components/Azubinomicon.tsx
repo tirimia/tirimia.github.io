@@ -1,31 +1,23 @@
 import { PagesContext, usePages } from "../hooks/usePages.tsx";
 import { Graph } from "@components/Graph.tsx";
 import { Notes } from "@components/Notes.tsx";
-import { useState } from "react";
-
+import { QuickFind } from "@components/QuickFind.tsx";
+import { useMemo } from "react";
+import { GraphContext, useGraph } from "@hooks/useGraph.tsx";
 
 export function Azubinomicon() {
     const pageHook = usePages();
-    const [graphOpen, setGraphOpen] = useState(false);
-    // TODO: MAYBE: cmd+k integration 
+    const graphData = useGraph()
+
+    const quickFindData = useMemo(() => graphData.nodes.map(node => ({ key: node.name, value: node.id })), [graphData])
 
     return (
         <PagesContext.Provider value={pageHook}>
-            <div id="azubinomicon">
+            <GraphContext.Provider value={graphData}>
+                <QuickFind title="Notes" items={quickFindData} onPick={(item) => pageHook.openPage(0)(item)} />
                 <Notes />
-            </div>
-            <div className={`graph-panel ${graphOpen ? "open" : ''}`}>
-                <div id="graph">
-                    <Graph />
-                </div>
-                <button
-                    className={"graph-toggle"}
-                    onClick={() => setGraphOpen(!graphOpen)}
-                    aria-label="Toggle graph view"
-                >
-                    {graphOpen ? '▲' : 'Open graph ▼'}
-                </button>
-            </div>
+                <Graph />
+            </GraphContext.Provider>
         </PagesContext.Provider>
     )
 }

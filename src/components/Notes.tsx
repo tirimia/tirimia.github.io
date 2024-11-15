@@ -15,8 +15,8 @@ export function Notes() {
     const welcomeNote = <Note name={"welcome"} onClick={openPage(0)} />
 
     return (
-        <>
+        <div id="azubinomicon" >
             {notes.length === 0 ? welcomeNote : notes}
-        </>
+        </div>
     );
 }
