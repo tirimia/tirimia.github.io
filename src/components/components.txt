@@ -1,0 +1,292 @@
+----- ./Note.tsx -----
+import { useEffect, useState } from "react";
+import { LoadingSpinner } from "@components/LoadingSpinner";
+
+interface Props {
+    name: string;
+    onClick: (url: string) => void;
+}
+
+const notesPath = "/azubinomicon/notes/";
+export function Note({ name, onClick }: Props) {
+    const [content, setContent] = useState<string | undefined>(undefined);
+
+    useEffect(() => {
+        fetch(`${notesPath}${name}`)
+            .then((response) => response.text())
+            .then((html) => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, "text/html");
+                setContent(doc.body.innerHTML);
+            });
+    }, [name]);
+
+    const isAnchorElement = (element: EventTarget): element is HTMLAnchorElement => {
+        return element instanceof HTMLAnchorElement;
+    };
+
+    const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (isAnchorElement(e.target)) {
+            const page = new URL(e.target.href);
+            if (page.pathname.startsWith(notesPath)) {
+                e.preventDefault();
+                onClick(page.pathname.replace(".html", "").replace(notesPath, ""));
+                return;
+            }
+        }
+    };
+    if (!content) {
+        return <LoadingSpinner />
+    }
+
+    return <div className="note" onClick={handleClick} dangerouslySetInnerHTML={{ __html: content }} />;
+}
+
+
+
+----- ./QuickFind.tsx -----
+import { Command } from 'cmdk'
+import { useEffect, useState } from 'react'
+interface KeyValue {
+    key: string,
+    value: string
+}
+type Groups = { [key: string]: KeyValue[] }
+interface QuickFindProps {
+    title: string,
+    items: Groups | KeyValue[],
+    onPick: (item: string) => void
+}
+export function QuickFind({ title, items, onPick }: QuickFindProps) {
+    const [open, setOpen] = useState(false)
+
+    function KVToItem({ key, value }: KeyValue) {
+        return (<Command.Item key={key} value={value} onSelect={(val) => {
+            onPick(val);
+            setOpen(false);
+        }}>{key}</Command.Item>)
+    }
+    function GroupToCommandGroup(title: string, group: KeyValue[]) {
+        return (
+            <Command.Group heading={title}>
+                {group.map(KVToItem)}
+            </ Command.Group>
+        )
+    }
+
+    useEffect(() => {
+        const down = (e: KeyboardEvent) => {
+            if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+                e.preventDefault()
+                setOpen((open) => !open)
+            }
+            if (e.key === 'Escape') {
+                setOpen(false)
+            }
+        }
+
+        document.addEventListener('keydown', down)
+        return () => document.removeEventListener('keydown', down)
+    }, [])
+
+    const entries = Array.isArray(items) ? items.map(KVToItem) : Object.entries(items).map(([groupName, group]) => (
+        GroupToCommandGroup(groupName, group)
+    ))
+
+    if (!open) {
+        return null
+    }
+
+    return (
+        <Command title={title}>
+            <Command.Input placeholder={title} autoFocus data-1p-ignore data-lpignore="true" />
+            <Command.List>
+                {entries}
+                <Command.Empty>No results found.</Command.Empty>
+            </Command.List>
+        </Command>
+    )
+}
+
+
+
+----- ./Notes.tsx -----
+import { useContext, useState } from "react";
+import { PagesContext } from "@hooks/usePages";
+import { Note } from "./Note";
+import { Graph } from "./Graph";
+
+const styles = {
+    container: {
+        display: 'flex',
+        flexDirection: 'column' as const,
+        padding: '2rem',
+        height: '100%',
+        overflow: 'hidden',
+    },
+    toggle: {
+        cursor: 'pointer',
+        background: 'var(--surface)',
+        padding: '0.5rem 1rem',
+        borderRadius: '0.5rem',
+        boxShadow: '0 2px 8px rgba(15, 23, 42, 0.1)',
+        border: 'none',
+        transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+        ':hover': {
+            transform: 'translateY(-2px)',
+            boxShadow: '0 4px 12px rgba(15, 23, 42, 0.15)',
+        }
+    },
+    graphContainer: {
+        display: 'none',
+        flex: 1,
+        position: 'relative' as const,
+    },
+    graphVisible: {
+        display: 'block',
+    }
+};
+
+
+export function Notes() {
+    const { pages, openPage } = useContext(PagesContext);
+    const [graphOpen, setGraphOpen] = useState(false);
+
+    const notes = pages.map((p, idx) => (
+        <Note
+            key={`${idx}-${p}`}
+            name={p}
+            onClick={openPage(idx + 1)}
+        />
+    ))
+    const welcomeNote = <Note name={"welcome"} onClick={openPage(0)} />
+
+    return (
+        <div style={styles.container}>
+            <div className="notes-header">
+                <button
+                    style={styles.toggle}
+                    onClick={() => setGraphOpen(!graphOpen)}
+                    aria-label="Toggle graph view"
+                >
+                    {graphOpen ? 'Show notes' : 'Show graph'}
+                </button>
+            </div>
+            <div id="azubinomicon" style={{ display: graphOpen ? 'none' : 'grid' }}>
+                {notes.length === 0 ? welcomeNote : notes}
+            </div>
+            <div style={{
+                ...styles.graphContainer,
+                ...(graphOpen ? styles.graphVisible : {})
+            }}>
+                <Graph />
+            </div>
+        </div>
+    );
+}
+
+
+
+----- ./Graph.tsx -----
+import ForceGraph2D from 'react-force-graph-2d';
+import { PagesContext } from "@hooks/usePages";
+import { useContext } from "react";
+import { GraphContext } from '@hooks/useGraph';
+
+const styles = {
+    container: {
+        flex: 1,
+        width: '100%',
+        height: '100%',
+        position: 'relative' as const,
+    },
+    graphContainer: {
+        position: 'absolute' as const,
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+    }
+};
+
+export function Graph() {
+    const { pages, openPage } = useContext(PagesContext);
+    const graphData = useContext(GraphContext);
+
+    function clickNode({ id }: { id: string }) {
+        openPage(0)(id);
+        window.location.reload();
+    }
+
+    const accentColor = getComputedStyle(document.documentElement)
+        .getPropertyValue('--accent').trim();
+    const primaryColor = getComputedStyle(document.documentElement)
+        .getPropertyValue('--primary').trim();
+
+    return (
+        <div style={styles.container}>
+            <div style={styles.graphContainer}>
+
+                <ForceGraph2D
+                    graphData={graphData}
+                    onNodeClick={clickNode}
+                    backgroundColor='var(--surface-alt)'
+                    linkWidth={5}
+                    linkColor={`${getComputedStyle(document.documentElement).getPropertyValue('--secondary')}33`}
+                    nodeLabel={"name"}
+                    maxZoom={5}
+                    minZoom={1}
+                    width={window.innerWidth}
+                    height={window.innerHeight}
+                    nodeCanvasObject={(node, ctx) => {
+                        const isPage = pages.includes(node.id);
+                        const nodeRadius = 6;
+
+                        ctx.beginPath();
+                        ctx.arc(node.x!, node.y!, nodeRadius, 0, 2 * Math.PI);
+                        ctx.fillStyle = isPage ? accentColor : primaryColor;
+                        ctx.fill();
+
+                        ctx.font = '12px system-ui, sans-serif';
+                        ctx.textAlign = 'center';
+                        ctx.fillStyle = 'var(--primary)';
+                        ctx.fillText(node.name, node.x!, node.y! + nodeRadius + 8);
+                    }}
+                    nodeCanvasObjectMode={() => "replace"}
+                />
+            </div>
+        </div>
+    );
+}
+
+
+
+----- ./LoadingSpinner.tsx -----
+export function LoadingSpinner() { return (<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,4a8,8,0,0,1,7.89,6.7A1.53,1.53,0,0,0,21.38,12h0a1.5,1.5,0,0,0,1.48-1.75,11,11,0,0,0-21.72,0A1.5,1.5,0,0,0,2.62,12h0a1.53,1.53,0,0,0,1.49-1.3A8,8,0,0,1,12,4Z"><animateTransform attributeName="transform" type="rotate" dur="0.75s" values="0 12 12;360 12 12" repeatCount="indefinite" /></path></svg>) }
+
+
+----- ./Azubinomicon.tsx -----
+import { PagesContext, usePages } from "../hooks/usePages.tsx";
+import { Notes } from "@components/Notes.tsx";
+import { QuickFind } from "@components/QuickFind.tsx";
+import { useMemo } from "react";
+import { GraphContext, useGraph } from "@hooks/useGraph.tsx";
+
+export function Azubinomicon() {
+    const pageHook = usePages();
+    const graphData = useGraph()
+
+    const quickFindData = useMemo(() => graphData.nodes.map(node => ({ key: node.name, value: node.id })), [graphData])
+
+    return (
+        <PagesContext.Provider value={pageHook}>
+            <GraphContext.Provider value={graphData}>
+                <QuickFind title="Notes" items={quickFindData} onPick={(item) => pageHook.openPage(0)(item)} />
+                <Notes />
+            </GraphContext.Provider>
+        </PagesContext.Provider>
+    )
+}
+
+
+

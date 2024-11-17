@@ -1,8 +1,9 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import Header from "@components/Header.astro";
+import '@styles/global.css'
 ---
-<Layout title="Blog">
+<Layout title="Azubinomicon">
     <Header />
     <main>
         <slot />
@@ -10,8 +11,7 @@ import Header from "@components/Header.astro";
 </Layout>
 <style>
     main {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        overflow: auto;
+        margin-bottom: 2em;
     }
 </style>

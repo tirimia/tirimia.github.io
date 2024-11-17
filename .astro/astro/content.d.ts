@@ -1,4 +1,15 @@
 declare module 'astro:content' {
+	interface Render {
+		'.mdx': Promise<{
+			Content: import('astro').MarkdownInstance<{}>['Content'];
+			headings: import('astro').MarkdownHeading[];
+			remarkPluginFrontmatter: Record<string, any>;
+			components: import('astro').MDXInstance<{}>['components'];
+		}>;
+	}
+}
+
+declare module 'astro:content' {
 	interface RenderResult {
 		Content: import('astro/runtime/server/index.js').AstroComponentFactory;
 		headings: import('astro').MarkdownHeading[];
@@ -155,22 +166,22 @@ declare module 'astro:content' {
   collection: "articles";
   data: InferEntrySchema<"articles">
 } & { render(): Render[".md"] };
-"go_is_a_bad_friend.md": {
-	id: "go_is_a_bad_friend.md";
+"go_is_a_bad_friend.mdx": {
+	id: "go_is_a_bad_friend.mdx";
   slug: "go_is_a_bad_friend";
   body: string;
   collection: "articles";
   data: InferEntrySchema<"articles">
-} & { render(): Render[".md"] };
+} & { render(): Render[".mdx"] };
 };
 "notes": {
-"azubinomicon.md": {
-	id: "azubinomicon.md";
+"azubinomicon.mdx": {
+	id: "azubinomicon.mdx";
   slug: "azubinomicon";
   body: string;
   collection: "notes";
   data: InferEntrySchema<"notes">
-} & { render(): Render[".md"] };
+} & { render(): Render[".mdx"] };
 "binary.md": {
 	id: "binary.md";
   slug: "binary";

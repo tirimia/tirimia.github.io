@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BlogLayout from "@layouts/Blog.astro";
+import "remark-github-blockquote-alert/alert.css";
 
 export async function getStaticPaths() {
     const articles = (await getCollection("articles")).sort((lhs,rhs) => lhs.data.publishedAt.valueOf() - rhs.data.publishedAt.valueOf());
@@ -16,46 +17,64 @@ export async function getStaticPaths() {
         });
     }
 
-// TODO: make a next or previous article button component
-
 const { article, next, previous } = Astro.props;
+article.body = `> [!NOTE]
+> This article is a work in progress, and is not yet complete.` + article.body;
 const { Content } = await article.render()
-// TODO: make a layout to wrap the articles and put the charset there
 ---
 <BlogLayout title={article.data.title}>
-    <h1>{article.data.title}</h1>
-    {!!article.data.subtitle && <h2>{article.data.subtitle}</h2> }
-    <div class="article-body">
-        <Content/>
+    <div class="title">
+        <h1>{article.data.title}</h1>
+        {!!article.data.subtitle && <h2>{article.data.subtitle}</h2> }
     </div>
-    <div class="article-navigation">
-        {previous && <a href={`/blog/${previous.slug}`} class="previous">
-            <span class="previous-title">{previous.data.title}</span>
-        </a>}
-        {next && <a href={`/blog/${next.slug}`} class="next">
-            <span class="next-title">{next.data.title}</span>
-        </a>}
+    <div class="main">
+        <div class="body">
+            <Content/>
+        </div>
+        <div class="navigation">
+            {previous ? <a href={`/blog/${previous.slug}`} class="previous">
+                {previous.data.title}
+            </a> : <a href={"/blog"} class="previous">EOF: Back to blog</a>}
+                {next ? <a href={`/blog/${next.slug}`} class="next">
+                {next.data.title}
+            </a> : <a href={"/blog"} class="next">EOF: Back to blog</a>}
+        </div>
     </div>
 </BlogLayout>
 <style>
+    .main {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        max-width: 80ch;
+        margin-inline: 2rem;
+    }
+    .title {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
     h1 {
-        margin-bottom: 0.5rem;
+        font-size: 2.5rem;
+        margin-bottom: 0;
     }
 
     h2 {
-        margin-top: 0.5rem;
-    }
-    .article-body {
-        max-width: 800px;
-        margin: auto;
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        margin-top: 0;
+        color: var(--secondary);
     }
 
-    .article-navigation {
+    .navigation {
         display: flex;
         justify-content: space-between;
         align-items: center;
         gap: 2rem;
         max-width: 800px;
+        min-width: 50ch;
         margin: 3rem auto;
     }
 
@@ -70,31 +89,14 @@ const { Content } = await article.render()
         flex: 1;
         display: flex;
         align-items: center;
+        color: var(--secondary);
     }
 
     .previous:hover, .next:hover {
         transform: translateY(-3px);
         box-shadow: rgba(15, 23, 42, 0.2) 0px 12px 24px,
                     rgba(15, 23, 42, 0.3) 0px 8px 16px;
-    }
-
-    .previous {
-        text-align: left;
-    }
-
-    .next {
-        text-align: right;
-        justify-content: flex-end;
-    }
-
-    .previous-title, .next-title {
-        color: var(--secondary);
-        transition: color 0.2s ease;
-    }
-
-    .previous:hover .previous-title,
-    .next:hover .next-title {
-        color: var(--primary);
+                    color: var(--accent);
     }
 
     .previous::before {

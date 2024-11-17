@@ -1,0 +1,42 @@
+---
+title: Go is a bad friend ☹️
+publishedAt: 2024-11-11
+---
+import Gonger from './assets/Gonger.png';
+
+### Motivation behind this article
+At work I've been working on a somewhat greenfield project written in Go; with all the frustrations piling up, and my endless office rants on the topic, the lovely [Matthias Endler](https://github.com/mre) conviced me to write this blog post to channel my energy into a more productive direction.
+
+**P.S.** Definitely check out his [blog](https://endler.dev/) if you're interested in quality material from one of the most level-headed developers I've ever met.
+
+### Why go is a friend in the first place
+<div style={{ display: 'flex', alignItems: 'center', gap: '1rem', border: '1px solid var(--secondary)', padding: '1rem' }}>
+  *Look at this cutie, how could you not love him at first sight ? Are you a monster or something ?*
+  <img src={Gonger.src} alt="gonger" width="100" />
+</div>
+#### Easy to get to know
+Go doesn't have much syntax to wrap your head around, you can pick it up in a week or two and be incredibly productive.
+
+You start writing it and besides figuring out where to put the arrows and which way for channels, you're constantly feel like you've seen this all already and can feel at ease.
+#### Makes you feel at home
+There is no single part of the language that I have found jarring in any way. You don't need to feel uneasy navigating things like Rust's lifetimes or Lisp's lack of `return`, or god-forbid, Gleam's lack of mutability 😱.
+#### Very knowledgeable
+The sheer amount of libraries out there is mind-blowing, and the community is very welcoming and supportive. Also, if you're doing anything remotely SRE-related, there's likely
+
+### Time for the negatives
+#### Stubborn to a fault
+*My way or the highway - no exceptions*
+#### Doublespeak
+Pointers for both optionals and passing references? Why not?
+#### Simplistic worldview
+Life is so complex, the world is full of idiosyncrasies, but instead of trying to wrap its head around it, go just pretends none of that complexity exists.
+
+You have to deal with multiple *sort of* similar structures, and you ***luckily*** can tell them apart based on a field they all share? Cool story, bro! No discriminated unions here, good luck [dealing with that](https://danielmschmidt.de/posts/2024-07-22-discriminated-union-pattern-in-go/).
+### Making you put in extra work
+When passing an optional int, makes you <mark class="alt-mark">allocate some shit</mark> then pass the result
+### Unclear communication
+#### Optional types have to be pointers
+
+Shoutout to [Matthias Endler](https://github.com/mre) for getting me to start writing out my thoughts, after many discussions on the topic of this article.
+
+Things golang does wrong that can be paralleled to how a friend can do you wrong:

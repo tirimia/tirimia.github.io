@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { PagesContext } from "@hooks/usePages";
-import { Note } from "./Note";
+import { Note } from "@components/Note";
 
 export function Notes() {
     const { pages, openPage } = useContext(PagesContext);
@@ -15,7 +15,7 @@ export function Notes() {
     const welcomeNote = <Note name={"welcome"} onClick={openPage(0)} />
 
     return (
-        <div id="azubinomicon" >
+        <div id="azubinomicon">
             {notes.length === 0 ? welcomeNote : notes}
         </div>
     );

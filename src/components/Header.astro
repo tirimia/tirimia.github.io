@@ -1,60 +1,82 @@
 ---
-interface Link {
-    href: string;
-    text: string;
-}
-interface Props {
-    links: Link[];
-}
+import { GithubIcon, LinkedInIcon } from '@components/icons';
+import NavigationLink from '@components/NavigationLink.astro';
 
-const { links } = Astro.props;
+const links = [
+    { href: "/blog", text: "Blog" },
+    { href: "/azubinomicon", text: "Azubinomicon" }
+];
 ---
-
-<header class="site-header">
-    <div class="container">
+<header>
+        <a href="/" class="brand">
+            <span class="name">tirimia</span>
+        </a>
         <nav class="links">
-            <a href="/">Home</a>
-            { links.map(({ href, text }) => <a href={href}>{text}</a>) }
-            <a href="https://github.com/tirimia">GitHub</a>
+            {links.map(link => (
+                <NavigationLink href={link.href} text={link.text} />
+            ))}
         </nav>
-    </div>
+        <div class="social">
+            <a href="https://github.com/tirimia" target="_blank" rel="noopener noreferrer" class="social-link">
+                <Fragment set:html={GithubIcon} />
+            </a>
+            <a href="https://linkedin.com/in/tirimia" target="_blank" rel="noopener noreferrer" class="social-link">
+                <Fragment set:html={LinkedInIcon} />
+            </a>
+        </div>
 </header>
 <style>
-    .site-header {
-        background-color: var(--surface-alt);
-        padding: 1.5rem;
-        width: 100%;
-        box-shadow: 0 8px 16px -6px rgba(15, 23, 42, 0.1);
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
-    .site-header .container {
-        max-width: 960px;
-        margin: 0 auto;
+    header {
         display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        gap: 1.5rem;
+        flex-direction: row;
+        justify-content: space-between;
+
+        padding: 1rem;
+        margin-inline: 2rem;
+        border-bottom: 1px solid var(--secondary);
     }
-    .site-header .links {
+
+    @media (max-width: 768px) {
+        header {
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        .social {
+            order: 2;
+        }
+    }
+
+    .brand {
+        text-decoration: none;
+    }
+
+    .name {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: var(--primary);
+    }
+
+    .links {
         display: flex;
-        gap: 1.5rem;
-        flex-wrap: wrap;
+        gap: 2rem;
+        flex: 1;
+        justify-content: center;
     }
-    .site-header .links a {
+
+    .social {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .social-link {
         color: var(--secondary);
         transition: color 0.2s ease;
+        display: flex;
+        align-items: center;
     }
-    .site-header .links a:hover {
+
+    .social-link:hover {
         color: var(--accent);
     }
-    @media (max-width: 768px) {
-        .site-header .container {
-            justify-content: center;
-        }
-        .site-header .links {
-            justify-content: center;
-        }
-    }
-    </style>
+</style>

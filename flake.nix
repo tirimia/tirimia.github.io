@@ -28,6 +28,8 @@
           astro-build.astro-vscode
           bbenoist.nix
           gruntfuggly.todo-tree
+          unifiedjs.vscode-mdx
+          supermaven.supermaven
         ];
       };
     });

@@ -1,0 +1,33 @@
+---
+import type { ComponentProps } from 'astro/types';
+import Card from "@components/Card.astro";
+interface Props {
+    cards: Array<ComponentProps<typeof Card>>;
+}
+
+const { cards } = Astro.props;
+---
+<div class="link-card-grid">
+    { cards.map((card) =>
+        <Card title={card.title} body={card.body} href={card.href} />
+    )}
+</div>
+<style>
+    .link-card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        width: 100%;
+        max-width: 1200px;
+        padding: 1rem;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+        .link-card-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            padding: 0.5rem;
+        }
+    }
+</style>
