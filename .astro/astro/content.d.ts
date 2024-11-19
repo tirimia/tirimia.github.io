@@ -203,6 +203,13 @@ declare module 'astro:content' {
   collection: "notes";
   data: InferEntrySchema<"notes">
 } & { render(): Render[".md"] };
+"html_encoding.md": {
+	id: "html_encoding.md";
+  slug: "html_encoding";
+  body: string;
+  collection: "notes";
+  data: InferEntrySchema<"notes">
+} & { render(): Render[".md"] };
 "number_base.md": {
 	id: "number_base.md";
   slug: "number_base";
@@ -213,6 +220,27 @@ declare module 'astro:content' {
 "programming.md": {
 	id: "programming.md";
   slug: "programming";
+  body: string;
+  collection: "notes";
+  data: InferEntrySchema<"notes">
+} & { render(): Render[".md"] };
+"set_theory.md": {
+	id: "set_theory.md";
+  slug: "set_theory";
+  body: string;
+  collection: "notes";
+  data: InferEntrySchema<"notes">
+} & { render(): Render[".md"] };
+"uri.md": {
+	id: "uri.md";
+  slug: "uri";
+  body: string;
+  collection: "notes";
+  data: InferEntrySchema<"notes">
+} & { render(): Render[".md"] };
+"url.md": {
+	id: "url.md";
+  slug: "url";
   body: string;
   collection: "notes";
   data: InferEntrySchema<"notes">

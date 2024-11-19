@@ -1,17 +1,18 @@
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-interface Link {
+export interface Link {
+    id: string,
     target: string,
     source: string,
     value: number
 }
 
-interface Node {
+export interface Node {
     id: string,
-    name: string
+    label: string
 }
 
-interface GraphData {
+export interface GraphData {
     nodes: Node[], links: Link[]
 }
 export function useGraph() {
@@ -26,5 +27,3 @@ export function useGraph() {
 
     return data
 }
-
-export const GraphContext = createContext<GraphData>({ nodes: [], links: [] })
