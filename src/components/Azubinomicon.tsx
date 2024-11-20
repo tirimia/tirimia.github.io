@@ -4,6 +4,7 @@ import { QuickFind } from "@components/QuickFind.tsx";
 import { useMemo, useState } from "react";
 import { useGraph } from "@hooks/useGraph.tsx";
 import { GraphCanvas, lightTheme } from 'reagraph';
+import { prefetch } from "astro:prefetch";
 
 const graphTheme: typeof lightTheme = {
     ...lightTheme,
@@ -38,6 +39,7 @@ export function Azubinomicon() {
     }}>
         <GraphCanvas nodes={nodes} edges={edges}
             onNodeClick={(n) => { pageHook.openPage(0)(n.id); setGraphOpen(false); }}
+            onNodePointerOver={(n) => { prefetch(`/azubinomicon/notes/${n.id}`); }}
             theme={graphTheme}
             actives={pageHook.pages}
             layoutType="forceDirected2d"
