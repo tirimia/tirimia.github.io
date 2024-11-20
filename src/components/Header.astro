@@ -1,11 +1,14 @@
 ---
 import { GithubIcon, LinkedInIcon } from '@components/icons';
 import NavigationLink from '@components/NavigationLink.astro';
-
-const links = [
-    { href: "/blog", text: "Blog" },
-    { href: "/azubinomicon", text: "Azubinomicon" }
-];
+import { PageIDs, Pages } from '@pages/pages';
+const links =
+    PageIDs.map(href => (
+         {
+            href: `/${href}`,
+            text: Pages[href].title
+        }
+    ));
 ---
 <header>
         <a href="/" class="brand">

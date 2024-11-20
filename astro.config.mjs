@@ -7,6 +7,7 @@ import { remarkAlert } from "remark-github-blockquote-alert";
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://tirimia.github.io',
   integrations: [react(), mdx()],
   markdown: {
     remarkPlugins: [remarkRewriteLinks, remarkAlert],

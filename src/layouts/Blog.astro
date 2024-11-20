@@ -1,8 +1,11 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import Header from "@components/Header.astro";
+import { Pages } from "@pages/pages.ts";
+
+const { title, description } = Pages.blog;
 ---
-<Layout title="Blog">
+<Layout title={title} description={description}>
     <Header />
     <main>
         <slot />

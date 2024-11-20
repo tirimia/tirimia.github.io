@@ -2,17 +2,18 @@
 import '@fontsource-variable/work-sans';
 import '@fontsource/source-serif-pro';
 import '@styles/global.css'
+
 interface Props {
     title: string;
+    description?: string;
 }
-
-const { title } = Astro.props;
+const { title, description } = Astro.props;
 ---
 <!doctype html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta name="description" content="My personal homepage" />
+        <meta name="description" content={description ?? "My personal homepage"} />
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/png" href="/favicon.png" />
         <meta name="generator" content={Astro.generator} />

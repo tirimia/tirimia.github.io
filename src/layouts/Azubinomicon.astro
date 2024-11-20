@@ -1,9 +1,12 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import Header from "@components/Header.astro";
+import { Pages } from "@pages/pages.ts";
 import '@styles/global.css'
+
+const { description, title } = Pages.azubinomicon;
 ---
-<Layout title="Azubinomicon">
+<Layout title={title} description={description}>
     <Header />
     <main>
         <slot />
