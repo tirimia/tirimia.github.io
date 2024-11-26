@@ -203,6 +203,13 @@ declare module 'astro:content' {
   collection: "notes";
   data: InferEntrySchema<"notes">
 } & { render(): Render[".md"] };
+"glob.md": {
+	id: "glob.md";
+  slug: "glob";
+  body: string;
+  collection: "notes";
+  data: InferEntrySchema<"notes">
+} & { render(): Render[".md"] };
 "html_encoding.md": {
 	id: "html_encoding.md";
   slug: "html_encoding";
