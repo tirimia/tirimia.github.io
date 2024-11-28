@@ -1,7 +1,7 @@
 ---
 title: Glob
 ---
-Glob is a pattern matching language that is used to match file names. It is similar to regular expressions, but less powerful.
+Glob is a pattern matching language that is used to match file names. It is similar to [regular expressions](./regex.md), but less powerful.
 
 Globs are used in [shell](./shell.md) commands like `ls` and `find` to specify which files to list.
 

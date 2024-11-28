@@ -1,7 +1,7 @@
 ---
 title: HTML Encoding
 ---
-[URIs](./uri.md) only support a [subset](./set_theory.md) of [ASCII](./ascii.md) characters as mentioned in [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986#section-2).
+[URIs](./uri.md) only support a [subset](./set_theory.md) of [ASCII](./ascii.md) characters as mentioned in [RFC](./rfc.md) number [3986](https://www.rfc-editor.org/rfc/rfc3986#section-2).
 
 In order to pass
 

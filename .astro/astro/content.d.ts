@@ -175,6 +175,20 @@ declare module 'astro:content' {
 } & { render(): Render[".mdx"] };
 };
 "notes": {
+"12_factor_apps.md": {
+	id: "12_factor_apps.md";
+  slug: "12_factor_apps";
+  body: string;
+  collection: "notes";
+  data: InferEntrySchema<"notes">
+} & { render(): Render[".md"] };
+"ascii.md": {
+	id: "ascii.md";
+  slug: "ascii";
+  body: string;
+  collection: "notes";
+  data: InferEntrySchema<"notes">
+} & { render(): Render[".md"] };
 "azubinomicon.mdx": {
 	id: "azubinomicon.mdx";
   slug: "azubinomicon";
@@ -203,9 +217,37 @@ declare module 'astro:content' {
   collection: "notes";
   data: InferEntrySchema<"notes">
 } & { render(): Render[".md"] };
+"chmod.md": {
+	id: "chmod.md";
+  slug: "chmod";
+  body: string;
+  collection: "notes";
+  data: InferEntrySchema<"notes">
+} & { render(): Render[".md"] };
+"environment_variables.md": {
+	id: "environment_variables.md";
+  slug: "environment_variables";
+  body: string;
+  collection: "notes";
+  data: InferEntrySchema<"notes">
+} & { render(): Render[".md"] };
+"escape_character.md": {
+	id: "escape_character.md";
+  slug: "escape_character";
+  body: string;
+  collection: "notes";
+  data: InferEntrySchema<"notes">
+} & { render(): Render[".md"] };
 "glob.md": {
 	id: "glob.md";
   slug: "glob";
+  body: string;
+  collection: "notes";
+  data: InferEntrySchema<"notes">
+} & { render(): Render[".md"] };
+"grep.md": {
+	id: "grep.md";
+  slug: "grep";
   body: string;
   collection: "notes";
   data: InferEntrySchema<"notes">
@@ -231,9 +273,51 @@ declare module 'astro:content' {
   collection: "notes";
   data: InferEntrySchema<"notes">
 } & { render(): Render[".md"] };
+"python.md": {
+	id: "python.md";
+  slug: "python";
+  body: string;
+  collection: "notes";
+  data: InferEntrySchema<"notes">
+} & { render(): Render[".md"] };
+"regex.md": {
+	id: "regex.md";
+  slug: "regex";
+  body: string;
+  collection: "notes";
+  data: InferEntrySchema<"notes">
+} & { render(): Render[".md"] };
+"rfc.md": {
+	id: "rfc.md";
+  slug: "rfc";
+  body: string;
+  collection: "notes";
+  data: InferEntrySchema<"notes">
+} & { render(): Render[".md"] };
+"sed.md": {
+	id: "sed.md";
+  slug: "sed";
+  body: string;
+  collection: "notes";
+  data: InferEntrySchema<"notes">
+} & { render(): Render[".md"] };
 "set_theory.md": {
 	id: "set_theory.md";
   slug: "set_theory";
+  body: string;
+  collection: "notes";
+  data: InferEntrySchema<"notes">
+} & { render(): Render[".md"] };
+"shebang.md": {
+	id: "shebang.md";
+  slug: "shebang";
+  body: string;
+  collection: "notes";
+  data: InferEntrySchema<"notes">
+} & { render(): Render[".md"] };
+"shell_script.md": {
+	id: "shell_script.md";
+  slug: "shell_script";
   body: string;
   collection: "notes";
   data: InferEntrySchema<"notes">
