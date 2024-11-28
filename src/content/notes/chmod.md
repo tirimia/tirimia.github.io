@@ -2,7 +2,7 @@
 title: Chmod
 ---
 
-Chmod is a command line tool that allows you to change the permissions of a file or directory.
+Chmod is a command line tool that allows you to change the [permissions](./file_permissions.md) of a file or directory.
 
 ### Examples
 ```bash

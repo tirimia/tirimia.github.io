@@ -224,6 +224,27 @@ declare module 'astro:content' {
   collection: "notes";
   data: InferEntrySchema<"notes">
 } & { render(): Render[".md"] };
+"cryptography.md": {
+	id: "cryptography.md";
+  slug: "cryptography";
+  body: string;
+  collection: "notes";
+  data: InferEntrySchema<"notes">
+} & { render(): Render[".md"] };
+"determinism.md": {
+	id: "determinism.md";
+  slug: "determinism";
+  body: string;
+  collection: "notes";
+  data: InferEntrySchema<"notes">
+} & { render(): Render[".md"] };
+"dictionary.md": {
+	id: "dictionary.md";
+  slug: "dictionary";
+  body: string;
+  collection: "notes";
+  data: InferEntrySchema<"notes">
+} & { render(): Render[".md"] };
 "environment_variables.md": {
 	id: "environment_variables.md";
   slug: "environment_variables";
@@ -234,6 +255,13 @@ declare module 'astro:content' {
 "escape_character.md": {
 	id: "escape_character.md";
   slug: "escape_character";
+  body: string;
+  collection: "notes";
+  data: InferEntrySchema<"notes">
+} & { render(): Render[".md"] };
+"file_permissions.md": {
+	id: "file_permissions.md";
+  slug: "file_permissions";
   body: string;
   collection: "notes";
   data: InferEntrySchema<"notes">
@@ -252,6 +280,13 @@ declare module 'astro:content' {
   collection: "notes";
   data: InferEntrySchema<"notes">
 } & { render(): Render[".md"] };
+"hashing.md": {
+	id: "hashing.md";
+  slug: "hashing";
+  body: string;
+  collection: "notes";
+  data: InferEntrySchema<"notes">
+} & { render(): Render[".md"] };
 "html_encoding.md": {
 	id: "html_encoding.md";
   slug: "html_encoding";
@@ -262,6 +297,13 @@ declare module 'astro:content' {
 "number_base.md": {
 	id: "number_base.md";
   slug: "number_base";
+  body: string;
+  collection: "notes";
+  data: InferEntrySchema<"notes">
+} & { render(): Render[".md"] };
+"number_base_conversion_trick.md": {
+	id: "number_base_conversion_trick.md";
+  slug: "number_base_conversion_trick";
   body: string;
   collection: "notes";
   data: InferEntrySchema<"notes">
@@ -294,6 +336,13 @@ declare module 'astro:content' {
   collection: "notes";
   data: InferEntrySchema<"notes">
 } & { render(): Render[".md"] };
+"salting.md": {
+	id: "salting.md";
+  slug: "salting";
+  body: string;
+  collection: "notes";
+  data: InferEntrySchema<"notes">
+} & { render(): Render[".md"] };
 "sed.md": {
 	id: "sed.md";
   slug: "sed";
@@ -318,6 +367,13 @@ declare module 'astro:content' {
 "shell_script.md": {
 	id: "shell_script.md";
   slug: "shell_script";
+  body: string;
+  collection: "notes";
+  data: InferEntrySchema<"notes">
+} & { render(): Render[".md"] };
+"unicode.md": {
+	id: "unicode.md";
+  slug: "unicode";
   body: string;
   collection: "notes";
   data: InferEntrySchema<"notes">
