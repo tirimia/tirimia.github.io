@@ -13,7 +13,7 @@ Get all lines in a file that contain the word "hello".
 grep 'hello' file.txt
 ```
 
-Get all lines in a file that contain the word "hello" and "world".
+Get all lines in all files in the directory that contain the word "hello" and "world".
 ```bash
-grep 'hello.*world' file.txt
+grep 'hello.*world' *
 ```

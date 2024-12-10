@@ -27,15 +27,18 @@ export async function getStaticPaths() {
     });
 }
 
-// TODO: see how prefetching can work
 // TODO: use the tags property on the entry
-// TODO: make images scale properly, see number system note
-// TODO: Tiny button on top to go to source of note
 const { entry, backlinks } = Astro.props;
 const { Content } = await entry.render();
+const fileUrl = import.meta.env.PROD ? `https://github.com/tirimia/tirimia.github.io/blob/main/src/content/notes/${entry.id}` : `vscode://file/${process.cwd()}/src/content/notes/${entry.id}`;
 ---
-
 <h1>{entry.data.title}</h1>
-{!!entry.data.draft && <h2>🚧 Note is not yet complete 🚧</h2>}
-{entry.body.length === 0 ? <h2>🚧 Empty for now 🚧</h2> : <Content />}
+{(!!entry.data.draft || entry.body.length === 0) &&
+    <h2>
+        <a href={fileUrl}>
+            🚧 DRAFT - click to see source 🚧
+        </a>
+    </h2>
+    }
+<Content />
 {Object.keys(backlinks).length > 0 && <Backlinks links={backlinks} />}
