@@ -231,6 +231,13 @@ declare module 'astro:content' {
   collection: "notes";
   data: any
 } & { render(): Render[".md"] };
+"c.md": {
+	id: "c.md";
+  slug: "c";
+  body: string;
+  collection: "notes";
+  data: any
+} & { render(): Render[".md"] };
 "chmod.md": {
 	id: "chmod.md";
   slug: "chmod";
@@ -262,6 +269,13 @@ declare module 'astro:content' {
 "cryptography.md": {
 	id: "cryptography.md";
   slug: "cryptography";
+  body: string;
+  collection: "notes";
+  data: any
+} & { render(): Render[".md"] };
+"csharp.md": {
+	id: "csharp.md";
+  slug: "csharp";
   body: string;
   collection: "notes";
   data: any
@@ -315,6 +329,13 @@ declare module 'astro:content' {
   collection: "notes";
   data: any
 } & { render(): Render[".md"] };
+"dotnet.md": {
+	id: "dotnet.md";
+  slug: "dotnet";
+  body: string;
+  collection: "notes";
+  data: any
+} & { render(): Render[".md"] };
 "dynamic_programming.md": {
 	id: "dynamic_programming.md";
   slug: "dynamic_programming";
@@ -346,6 +367,13 @@ declare module 'astro:content' {
 "file_permissions.md": {
 	id: "file_permissions.md";
   slug: "file_permissions";
+  body: string;
+  collection: "notes";
+  data: any
+} & { render(): Render[".md"] };
+"framework.md": {
+	id: "framework.md";
+  slug: "framework";
   body: string;
   collection: "notes";
   data: any
@@ -423,6 +451,13 @@ declare module 'astro:content' {
 "html_encoding.md": {
 	id: "html_encoding.md";
   slug: "html_encoding";
+  body: string;
+  collection: "notes";
+  data: any
+} & { render(): Render[".md"] };
+"http.md": {
+	id: "http.md";
+  slug: "http";
   body: string;
   collection: "notes";
   data: any
