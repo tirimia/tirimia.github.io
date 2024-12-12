@@ -9,7 +9,7 @@ const articles = (await getCollection("articles")).sort((lhs,rhs) => rhs.data.pu
     <div class="blog-content">
         <div class="blog-header">
             <h1>Personal blog</h1>
-            <h2>I just write about things, hope you get some value out of it too</h2>
+            <h2>All articles here are living documents, even drafts, you have been warned</h2>
         </div>
         <div class="blog-list">
             { articles.slice(0,5).map((article) =><BlogEntry article={article} />)}
