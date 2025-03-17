@@ -22,3 +22,7 @@ For example, if the user can do everything, the group can read and write, but ot
  |--------------------------------------|-------------------|--------------------|---------------------|
  | <mark class="alt-mark">Binary</mark> | 111               | 110                | 001                 |
  | <mark class="alt-mark">Octal</mark>  | 7                 | 6                  | 1                   |
+
+## Resources
+- [Wikipedia](https://en.wikipedia.org/wiki/File_system_permissions)
+- [File Access Modes](./file_access_modes.md)

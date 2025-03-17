@@ -173,6 +173,13 @@ declare module 'astro:content' {
   collection: "articles";
   data: InferEntrySchema<"articles">
 } & { render(): Render[".md"] };
+"empathy_driven_development.mdx": {
+	id: "empathy_driven_development.mdx";
+  slug: "empathy_driven_development";
+  body: string;
+  collection: "articles";
+  data: InferEntrySchema<"articles">
+} & { render(): Render[".mdx"] };
 "go_is_a_bad_friend.mdx": {
 	id: "go_is_a_bad_friend.mdx";
   slug: "go_is_a_bad_friend";
@@ -378,6 +385,27 @@ declare module 'astro:content' {
   collection: "notes";
   data: InferEntrySchema<"notes">
 } & { render(): Render[".md"] };
+"factory_pattern.md": {
+	id: "factory_pattern.md";
+  slug: "factory_pattern";
+  body: string;
+  collection: "notes";
+  data: InferEntrySchema<"notes">
+} & { render(): Render[".md"] };
+"file_access_modes.md": {
+	id: "file_access_modes.md";
+  slug: "file_access_modes";
+  body: string;
+  collection: "notes";
+  data: InferEntrySchema<"notes">
+} & { render(): Render[".md"] };
+"file_descriptor.md": {
+	id: "file_descriptor.md";
+  slug: "file_descriptor";
+  body: string;
+  collection: "notes";
+  data: InferEntrySchema<"notes">
+} & { render(): Render[".md"] };
 "file_permissions.md": {
 	id: "file_permissions.md";
   slug: "file_permissions";
@@ -490,9 +518,23 @@ declare module 'astro:content' {
   collection: "notes";
   data: InferEntrySchema<"notes">
 } & { render(): Render[".md"] };
+"interface.md": {
+	id: "interface.md";
+  slug: "interface";
+  body: string;
+  collection: "notes";
+  data: InferEntrySchema<"notes">
+} & { render(): Render[".md"] };
 "javascript.md": {
 	id: "javascript.md";
   slug: "javascript";
+  body: string;
+  collection: "notes";
+  data: InferEntrySchema<"notes">
+} & { render(): Render[".md"] };
+"kernel.md": {
+	id: "kernel.md";
+  slug: "kernel";
   body: string;
   collection: "notes";
   data: InferEntrySchema<"notes">
@@ -801,6 +843,13 @@ declare module 'astro:content' {
 "welcome.md": {
 	id: "welcome.md";
   slug: "welcome";
+  body: string;
+  collection: "notes";
+  data: InferEntrySchema<"notes">
+} & { render(): Render[".md"] };
+"xy_problem.md": {
+	id: "xy_problem.md";
+  slug: "xy_problem";
   body: string;
   collection: "notes";
   data: InferEntrySchema<"notes">
