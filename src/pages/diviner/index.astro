@@ -1,7 +1,7 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import Header from "@components/Header.astro";
-import ReactPdfGenerator from '@components/ReactPdfGenerator';
+import Diviner from '@components/Diviner';
 import '@styles/global.css';
 import { Pages } from "@pages/pages.ts";
 
@@ -10,8 +10,7 @@ const { title, description } = Pages.diviner;
 <Layout title={title} description={description}>
   <Header />
   <main>
-    <h1>Diviner</h1>
-    <ReactPdfGenerator client:load />
+    <Diviner client:only />
   </main>
  </Layout>
   <style>
